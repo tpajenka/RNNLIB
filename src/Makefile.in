@@ -76,7 +76,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = rnnlib$(EXEEXT)
+bin_PROGRAMS = $(top_builddir)/bin/rnnlib$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/build-aux/depcomp
@@ -90,10 +90,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_rnnlib_OBJECTS = DataExporter.$(OBJEXT) Main.$(OBJEXT) \
-	Random.$(OBJEXT)
-rnnlib_OBJECTS = $(am_rnnlib_OBJECTS)
-rnnlib_LDADD = $(LDADD)
+am___top_builddir__bin_rnnlib_OBJECTS = DataExporter.$(OBJEXT) \
+	Main.$(OBJEXT) Random.$(OBJEXT)
+__top_builddir__bin_rnnlib_OBJECTS =  \
+	$(am___top_builddir__bin_rnnlib_OBJECTS)
+__top_builddir__bin_rnnlib_LDADD = $(LDADD)
+am__dirstamp = $(am__leading_dot)dirstamp
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -123,8 +125,8 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(rnnlib_SOURCES)
-DIST_SOURCES = $(rnnlib_SOURCES)
+SOURCES = $(__top_builddir__bin_rnnlib_SOURCES)
+DIST_SOURCES = $(__top_builddir__bin_rnnlib_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -237,7 +239,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-rnnlib_SOURCES = DataExporter.cpp\
+__top_builddir__bin_rnnlib_SOURCES = DataExporter.cpp\
 Main.cpp\
 Random.cpp
 
@@ -317,10 +319,13 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+$(top_builddir)/bin/$(am__dirstamp):
+	@$(MKDIR_P) $(top_builddir)/bin
+	@: > $(top_builddir)/bin/$(am__dirstamp)
 
-rnnlib$(EXEEXT): $(rnnlib_OBJECTS) $(rnnlib_DEPENDENCIES) $(EXTRA_rnnlib_DEPENDENCIES) 
-	@rm -f rnnlib$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(rnnlib_OBJECTS) $(rnnlib_LDADD) $(LIBS)
+$(top_builddir)/bin/rnnlib$(EXEEXT): $(__top_builddir__bin_rnnlib_OBJECTS) $(__top_builddir__bin_rnnlib_DEPENDENCIES) $(EXTRA___top_builddir__bin_rnnlib_DEPENDENCIES) $(top_builddir)/bin/$(am__dirstamp)
+	@rm -f $(top_builddir)/bin/rnnlib$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(__top_builddir__bin_rnnlib_OBJECTS) $(__top_builddir__bin_rnnlib_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -461,6 +466,7 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(top_builddir)/bin/$(am__dirstamp)" || rm -f $(top_builddir)/bin/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
